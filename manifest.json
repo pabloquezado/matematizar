@@ -1,0 +1,24 @@
+{
+  "name": "Matematizar",
+  "short_name": "Matematizar",
+  "id": "/?source=pwa",
+  "start_url": "https://pabloquezado.github.io/matematizar/",
+  "display": "standalone",
+  "background_color": "#5900b3",
+  "theme_color": "#00d1ff",
+  "scope": "https://pabloquezado.github.io/matematizar/",
+  "description": "Plataforma de aprendizagem Matemática",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "https://pabloquezado.github.io/matematizar/assets/icon.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    },
+    {
+      "src": "https://pabloquezado.github.io/matematizar/assets/icon.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ]
+}
