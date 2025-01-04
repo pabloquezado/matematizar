@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Matematizar">
+  <meta property="og:description" content="Projeto de Inclusão Digital">
+  <meta property="og:url" content="https://pabloquezado.github.io/matematizar/">
+  <meta property="og:image" content="https://pabloquezado.github.io/matematizar/assets/capam.png"/>
+<meta charset="UTF-8">
+<meta name="language" content="ES">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-status-bar"
+content="#aa7700">
+<meta name="theme-color"
+content="black">
+<title>Matematizar</title>
+<link rel="icon" type="image/x-icon" href="https://pabloquezado.github.io/oficinati/assets/favicon.ico">
+<link rel="manifest"
+href="/manifest.json" crossorigin="use-credentials"/>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<body>
+	<style>
+		html {
+  box-sizing: border-box;
+  --bgColorMenu: #1d1d27;
+  --duration: 0.7s;
+}
+
+html *,
+html *::before,
+html *::after {
+  box-sizing: inherit;
+}
+
+
+.menu {
+  margin: 0;
+  display: flex;
+  /* Works well with 100% width  */
+  width: 100%;
+  font-size: 1.5em;
+  padding: 0 2.85em;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bgColorMenu);
+
+  bottom: 0;
+
+  z-index: 5;
+}
+
+.menu__item {
+  all: unset;
+  flex-grow: 1;
+  z-index: 100;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  align-items: center;
+  will-change: transform;
+  justify-content: center;
+  padding: 0.55em 0 0.85em;
+  transition: transform var(--timeOut, var(--duration));
+}
+
+.menu__item::before {
+  content: "";
+  z-index: -1;
+  width: 4.2em;
+  height: 4.2em;
+  border-radius: 50%;
+  position: absolute;
+  transform: scale(0);
+  transition: background-color var(--duration), transform var(--duration);
+}
+
+.menu__item.active {
+  transform: translate3d(0, -0.8em, 0);
+}
+
+.menu__item.active::before {
+  transform: scale(1);
+  background-color: var(--bgColorItem);
+}
+
+.icon {
+  width: 2.6em;
+  height: 2.6em;
+  stroke: white;
+  fill: transparent;
+  stroke-width: 1pt;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+}
+
+.menu__item.active .icon {
+  animation: strok 1.5s reverse;
+}
+
+@keyframes strok {
+  100% {
+    stroke-dashoffset: 400;
+  }
+}
+
+.menu__border {
+  left: 0;
+  bottom: 99%;
+  width: 10.9em;
+  height: 2.4em;
+  position: absolute;
+  clip-path: url(#menu);
+  will-change: transform;
+  background-color: var(--bgColorMenu);
+  transition: transform var(--timeOut, var(--duration));
+}
+
+.svg-container {
+  width: 0;
+  height: 0;
+}
+
+@media screen and (max-width: 50em) {
+  .menu {
+    font-size: 0.8em;
+  }
+}
+
+	</style>
+
+<script>
+	// Designed by:  Mauricio Bucardo
+// Original image:
+// https://dribbble.com/shots/5619509-Animated-Tab-Bar
+
+"use strict";
+
+const body = document.body;
+const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
+const menu = body.querySelector(".menu");
+const menuItems = menu.querySelectorAll(".menu__item");
+const menuBorder = menu.querySelector(".menu__border");
+let activeItem = menu.querySelector(".active");
+
+function clickItem(item, index) {
+  menu.style.removeProperty("--timeOut");
+
+  if (activeItem == item) return;
+
+  if (activeItem) {
+    activeItem.classList.remove("active");
+  }
+
+  item.classList.add("active");
+  body.style.backgroundColor = bgColorsBody[index];
+  activeItem = item;
+  offsetMenuBorder(activeItem, menuBorder);
+}
+
+function offsetMenuBorder(element, menuBorder) {
+  const offsetActiveItem = element.getBoundingClientRect();
+  const left =
+    Math.floor(
+      offsetActiveItem.left -
+        menu.offsetLeft -
+        (menuBorder.offsetWidth - offsetActiveItem.width) / 2
+    ) + "px";
+  menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
+}
+
+offsetMenuBorder(activeItem, menuBorder);
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => clickItem(item, index));
+});
+
+window.addEventListener("resize", () => {
+  offsetMenuBorder(activeItem, menuBorder);
+  menu.style.setProperty("--timeOut", "none");
+});
+
+</script>
+
+
+
+
+<header class="header">
+    <div class="nav container">
+      
+      
+        <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>
+        
+            <ul class="menu__box">
+                <img src="https://icon-library.com/images/mathematics-icon/mathematics-icon-12.jpg" style="border-radius: 50%; width: 150px; display: block; margin: auto;">
+             <br>
+              <li><a class="menu__a" href="aula19.html">Matematizar</a></li>
+              <li><a class="menu__a" href="#">Jogos</a></li>
+              <li><a class="menu__a" href="#">Atividades</a></li>
+              <li><a class="menu__a" href="#">Contato</a></li>
+              <li><a class="menu__a" href="#">Sobre</a></li>
+            </ul>
+          </div>
+
+
+          <style>
+            #menu__toggle {
+  opacity: 0;
+}
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  left: 0 !important;
+}
+.menu__btn {
+  position: fixed;
+  top: 25px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 7;
+}
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #616161;
+  transition-duration: .25s;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+.menu__box {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #ECEFF1;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  transition-duration: .25s;
+  
+  z-index: 6;
+}
+.menu__a {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+
+  text-align: center;
+}
+.menu__a:hover {
+  background-color: #CFD8DC;
+}
+          </style>
+        <a class="logo" href="#" style="text-align: left;color: white;">Matematizar</a>
+        <i id="cart-icon" class='bx bx-shopping-bag'></i>
+        <!-- CART -->
+        <div class="cart">
+            <h2 class="cart-title">Your Cart</h2>
+            <div class="cart-content">
+            </div>
+            <!-- total -->
+            <div class="total">
+                <div class="total-title">Total</div>
+                <div class="total-price">$0</div>
+            </div>
+            <!-- buy button -->
+            <button class="btn-buy" type="button">Buy Now</button>
+            <!-- cart close -->
+            <i id="close-cart" class='bx bx-x'></i>
+        </div>
+    </div>
+</header>
+<section class="shop container">
+    <h2 class="section-title" style="font-size: 25px;">Ábaco Aritmético</h2>
+<svg viewBox="0 0 100 100">
+	<style>
+		rect {
+			cursor: pointer;
+			transition: x 300ms;
+			transition-timing-function: cubic-bezier(0.58, 0.09, 0.87, 0.33);
+			box-shadow: 2px 2px 2px #000;
+		}
+		.toggled {
+			x: 40;
+		}
+		.row1{
+			fill: rgb(223, 72, 72);
+		}
+		.row2{
+			fill: #f1b425;
+		}
+		.row3{
+			fill: #eee129;
+		}
+		.row4{
+			fill: #31e231;
+		}
+		.row5{
+			fill: #2af08d;
+		}
+		.row6{
+			fill: #3d8dce;
+		}
+		.row7{
+			fill: #7B3BE3;
+		}
+		.row8{
+			fill: #a03ca3;
+		}
+		.row9{
+			fill: #e000cd;
+		}
+	</style>
+	<path d="M2.5 2.5v95M97.5 2.5v95" fill="none" stroke="tan" stroke-width="5" stroke-linecap="round" />
+	<path d="M5 10 h90 M5 20h90 M5 30h90 M5 40h90 M5 50h90 M5 60h90 M5 70h90 M5 80h90 M5 90h90" fill="none" stroke="tan" stroke-width="2" />
+	<g class="row1" fill="darkorange">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect id ="one" class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row2" transform="translate(0 10)" fill="firebrick">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row3" transform="translate(0 20)" fill="lime">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row4" transform="translate(0 30)" fill="purple">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row5" transform="translate(0 40)" fill="darkgrey">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row6" transform="translate(0 50)" fill="steelblue">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row7" transform="translate(0 60)" fill="#123">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row8" transform="translate(0 70)" fill="firebrick">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect id="one" class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+	<g class="row9" transform="translate(0 80)" fill="firebrick">
+		<rect class="bead b1" transform="translate(5 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b2" transform="translate(10 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b3" transform="translate(15 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b4" transform="translate(20 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b5" transform="translate(25 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b6" transform="translate(30 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b7" transform="translate(35 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b8" transform="translate(40 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b9" transform="translate(45 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+		<rect class="bead b10" transform="translate(50 0)" x="0" y="6" height="8" width="5" rx="2" dominant-baseline="middle" transform-origin="50% 50%" />
+	</g>
+</svg>
+    
+
+        <script>
+			document.querySelectorAll("rect.bead").forEach((bead) => {
+  bead.addEventListener("click", handleBeadClick);
+  bead.addEventListener("touchstart", handleBeadClick);
+});
+
+function handleBeadClick(evt) {
+	
+
+    
+  let parentGroup = evt.target.parentElement;
+  let currentClass = evt.target.getAttribute("class");
+  let currentPosition = parseInt(currentClass.match(/\bb(\d+)\b/)[1]);
+
+  const one = document.getElementById("one");
+  const number = document.getElementById("number");
+  
+  if (evt.target.classList.contains('toggled')) {
+    for (let i = 1; i <= currentPosition; i++) {
+      let currentBead = parentGroup.querySelector('.b' + i);
+      if (currentBead.classList.contains('toggled')) {
+        currentBead.classList.toggle('toggled');
+
+		number.textContent = "0";
+      }
+    }
+  } else {
+    for (let i = currentPosition; i <= 10; i++) {
+      let currentBead = parentGroup.querySelector('.b' + i);
+
+	 /* if (one.classList.contains('toggled')) {
+        one.classList.toggle('toggled');
+		var score = 0;
+		score * 10;
+		number.textContent = score;
+	  }*/
+      if (!currentBead.classList.contains('toggled')) {
+        currentBead.classList.toggle('toggled');
+		var score = 0;
+		score ++;
+		number.textContent = score;
+	  }
+	  else if (currentBead.classList.contains('toggled') && score == 1) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 2) {
+	    score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 3) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 4) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 5) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 6) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 7) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 8) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 9) {
+		score ++;
+		number.textContent = score;
+      }
+	  else if (currentBead.classList.contains('toggled') && score == 1) {
+		score ++;
+		number.textContent = score;
+      }
+	  
+	  else if (currentBead.classList.contains('toggled') && score == 1) {
+		let currentBead = querySelector('.bead b9');
+		var score = parseInt($('#number').val(), 10);
+		number.textContent = score;
+	  }
+    }
+  }
+}
+        </script>
+        
+<style>
+  .slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 22%;
+  gap: 1rem;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin-top: 5rem;
+  padding-inline: 1rem;
+}
+.slide{
+    transition: all 0.5s ease-out;
+}
+#unique:hover {
+transform: scale3d(1.2, 1.2, 1);
+box-shadow: none;
+transition: all 0.5s ease-out;
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}
+.slide img {
+  inline-size: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: .2rem;
+}
+@media (max-width: 440px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+  .slider {
+    grid-auto-columns: 40%;
+  }
+}
+</style>
+
+
+<br>
+<br>
+<h2 class="section-title" id="number">Quantidade</h2>
+
+
+
+
+</section>
+</body>
+
+<style>
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-padding-top: 2rem;
+	scroll-behavior: smooth;
+}
+body{
+    user-select: none;
+}
+/*
+body{
+    background-image: url(https://cdn.pixabay.com/photo/2016/12/28/01/44/leaf-notebook-1935230_960_720.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: solid black 3px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    user-select: none;
+}*/
+:root {
+	--main-color: #fd4646;
+	--text-color: #171427;
+	--bg-color: #171427
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	color: var(--text-color);
+	font-weight: 400;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	width: 100%;
+}
+
+/* ==========  ==================== */
+
+.container {
+	max-width: 1068px;
+	margin: auto;
+	width: 100%;
+}
+
+section {
+	padding: 4rem 0 3rem;
+}
+
+/* ========== HEADER ==================== */
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: var(--bg-color);
+	box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
+	z-index: 100;
+
+
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.logo {
+	font-size: 1.1rem;
+	color: var(--text-color);
+}
+
+#cart-icon {
+	font-size: 1.8rem;
+	cursor: pointer;
+}
+
+/* ========== CART ==================== */
+.cart {
+	position: fixed;
+	top: 0;
+	right: -100%;
+	width: 360px;
+	min-height: 100vh;
+	padding: 20px;
+	background-color: var(--bg-color);
+	box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
+	transition: right 0.3s;
+}
+
+.cart.active {
+	right: 0;
+}
+
+.cart-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.cart-box {
+	display: grid;
+	grid-template-columns: 32% 50% 18%;
+	gap: 1rem;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+.cart-img {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	padding: 10px;
+}
+
+.detail-box {
+	display: grid;
+	row-gap: 0.5rem;
+}
+
+.cart-product-title {
+	font-size: 1rem;
+	text-transform: uppercase;
+}
+
+.cart-price {
+	font-weight: 500;
+}
+
+.cart-quantity {
+	border: 1px solid var(--text-color);
+	outline-color: var(--main-color);
+	width: 2.4rem;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.cart-remove {
+	font-size: 1.5rem;
+	color: var(--main-color);
+	cursor: pointer;
+}
+
+.total {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+	border-top: 1px solid var(--text-color);
+}
+
+.total-title {
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.total-price {
+	margin-left: 0.5rem;
+}
+
+.btn-buy {
+	display: flex;
+	margin: 1.5rem auto 0 auto;
+	padding: 12px 20px;
+	font-size: 1rem;
+	font-weight: 500;
+	border: none;
+	background-color: var(--main-color);
+	color: var(--bg-color);
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-buy:hover {
+	background-color: var(--text-color);
+}
+
+#close-cart {
+	position: absolute;
+	top: 1rem;
+	right: 0.8rem;
+	color: var(--text-color);
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+
+.shop {
+	margin-top: 2rem;
+}
+
+.section-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+/* ========== SHOP CONTENT ==================== */
+.shop-content {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+	gap: 1.5rem;
+}
+
+.product-box {
+	position: relative;
+}
+
+.product-box:hover {
+	padding: 10px;
+	border: 1px solid var(--text-color);
+	transition: padding 0.4s;
+}
+
+.product-img {
+	width: 100%;
+	height: 300px;
+	margin-bottom: 0.5rem;
+  	object-fit: cover;
+}
+
+.product-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+}
+
+.price {
+	font-weight: 500;
+}
+
+.add-cart {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: var(--text-color);
+	color: var(--bg-color);
+	padding: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.add-cart:hover {
+	background-color: rgba(23, 20, 39, 0.8);
+}
+
+/* ========== Breakpoints ==================== */
+@media (max-width: 1080px) {
+	.nav {
+		padding: 15px;
+	}
+
+	section {
+		padding: 3rem 0 2rem;
+	}
+
+	.container {
+		margin: 0 auto;
+		width: 90%;
+	}
+
+	.shop {
+		margin-top: 2rem !important;
+	}
+}
+
+@media (max-width: 400px) {
+	.nav {
+		padding: 11px;
+	}
+
+	.logo {
+		font-size: 1rem;
+	}
+
+	.cart {
+		width: 320px;
+	}
+}
+
+@media (max-width: 360px) {
+	.shop {
+		margin-top: 1rem !important;
+	}
+
+	.cart {
+		width: 280px;
+	}
+}
+</style>
+
+
+<script>
+// ==== CART ==================
+let cartIcon = document.querySelector('#cart-icon');
+let cart = document.querySelector('.cart');
+let closeCart = document.querySelector('#close-cart');
+
+// == Open cart
+cartIcon.onclick = () => {
+	cart.classList.add('active');
+};
+
+// == Close cart
+closeCart.onclick = () => {
+	cart.classList.remove('active');
+};
+
+// == Close Working JavaScript
+if (document.readyState == 'loading') {
+	document.addEventListener('DOMContentLoaded', ready);
+} else {
+	ready();
+};
+
+// == Making Function
+function ready() {
+	// Remove items from cart
+	var removeCartButtons = document.getElementsByClassName('cart-remove');
+	console.log(removeCartButtons);
+	for (var i = 0; i < removeCartButtons.length; i++) {
+		var button = removeCartButtons[i];
+		button.addEventListener('click', removeCartItem);
+	}
+	// == Quantity changes
+	var quantityInputs = document.getElementsByClassName('cart-quantity');
+	for (var i = 0; i < quantityInputs.length; i++) {
+		var input = quantityInputs[i];
+		input.addEventListener('change', quantityChanged);
+	}
+	// Add to cart
+	var addCart = document.getElementsByClassName('add-cart');
+	for (var i = 0; i < addCart.length; i++) {
+		var button = addCart[i];
+		button.addEventListener('click', addCartClicked);
+	}
+
+	// Buy button work
+	document.getElementsByClassName('btn-buy')[0]
+		.addEventListener('click', buyButtonClicked);
+};
+
+// Buy button
+function buyButtonClicked() {
+	alert('Your order is placed');
+	var cartContent = document.getElementsByClassName('cart-content')[0];
+	while (cartContent.hasChildNodes()) {
+		cartContent.removeChild(cartContent.firstChild);
+	}
+	updatetotal();
+};
+
+// == Remove items from cart
+function removeCartItem(event) {
+	var buttonClicked = event.target;
+	buttonClicked.parentElement.remove();
+	updatetotal();
+};
+
+// == Quantity changes
+function quantityChanged(event) {
+	var input = event.target;
+	if (isNaN(input.value) || input.value <= 0) {
+		input.value = 1;
+	}
+	updatetotal();
+};
+
+// Add to cart
+function addCartClicked(event) {
+	var button = event.target;
+	var shopProducts = button.parentElement;
+	var title = shopProducts.getElementsByClassName('product-title')[0].innerText;
+	var price = shopProducts.getElementsByClassName('price')[0].innerText;
+	var productImg = shopProducts.getElementsByClassName('product-img')[0].src;
+	addProductToCart(title, price, productImg);
+	updatetotal();
+};
+function addProductToCart(title, price, productImg) {
+	var cartShopBox = document.createElement('div');
+	cartShopBox.classList.add('cart-box');
+	var cartItems = document.getElementsByClassName('cart-content')[0];
+	var cartItemsNames = cartItems.getElementsByClassName('cart-product-title');
+	for (var i = 0; i < cartItemsNames.length; i++) {
+		if (cartItemsNames[i].innerText == title) {
+			alert('You have already add this item to cart');
+			return;
+		}
+	}
+
+	var cartBoxContent = `
+  <img src="${productImg}" alt="image" class="cart-img">
+		<div class="detail-box">
+			<div class="cart-product-title">${title}</div>
+			<div class="cart-price">${price}</div>
+			<input class="cart-quantity" type="number" value="1">
+		</div>
+	<i class='bx bxs-trash-alt cart-remove'></i>
+`;
+
+	cartShopBox.innerHTML = cartBoxContent
+	cartItems.append(cartShopBox);
+	cartShopBox.
+		getElementsByClassName('cart-remove')[0]
+		.addEventListener('click', removeCartItem);
+	cartShopBox
+		.getElementsByClassName('cart-quantity')[0]
+		.addEventListener('change', quantityChanged);
+};
+// == Uptade total
+function updatetotal() {
+	var cartContent = document.getElementsByClassName('cart-content')[0];
+	var cartBoxes = cartContent.getElementsByClassName('cart-box');
+	var total = 0;
+	for (var i = 0; i < cartBoxes.length; i++) {
+		var cartBox = cartBoxes[i];
+		var priceElement = cartBox.getElementsByClassName('cart-price')[0];
+		var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
+		var price = parseFloat(priceElement.innerText.replace('$', ''));
+		var quantity = quantityElement.value;
+		total = total + (price * quantity);
+	}
+	// if price contain some cents value
+	total = Math.round(total * 100) / 100;
+
+	document.getElementsByClassName('total-price')[0].innerText = '$' + total;
+};
+
+</script>
