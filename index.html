@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Matematizar">
+  <meta property="og:description" content="Projeto de Inclusão Digital">
+  <meta property="og:url" content="https://pabloquezado.github.io/matematizar/">
+  <meta property="og:image" content="capam.png"/>
+<meta charset="UTF-8">
+<meta name="language" content="ES">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-status-bar"
+content="#aa7700">
+<meta name="theme-color"
+content="black">
+<title>Matematizar</title>
+<link rel="icon" type="image/x-icon" href="https://pabloquezado.github.io/oficinati/assets/favicon.ico">
+<link rel="manifest"
+href="/manifest.json" crossorigin="use-credentials"/>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/imagesloaded.pkgd.min.js"></script>
+</head>
+
+<body>  
+  <div class="loader-wrapper">
+    <img src="https://st3.depositphotos.com/26272052/32793/v/450/depositphotos_327937984-stock-illustration-gold-line-rubik-cube-icon.jpg" style="border-radius: 50%; width: 250px; display: block; margin: auto;" class="loader">
+    <div class="loader-section loader-section-left"></div>
+    <div class="loader-section loader-section-right"></div>
+  </div>
+
+  <style>
+    .no-js .loader-wrapper {
+display: none;
+}
+    .loader-wrapper {
+position: fixed;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+z-index: 2000;
+}
+
+.loader-wrapper > .loader {
+position: absolute;
+left: 50%;
+top: 50%;
+z-index: 2001;
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}
+
+.loader-wrapper > .loader-section {
+position: fixed;
+top: 0;
+width: 50%;
+height: 100%;
+z-index: 2000;
+background: white;
+}
+
+.loader-wrapper > .loader-section.loader-section-left {
+left: 0;
+}
+
+.loader-wrapper > .loader-section.loader-section-right {
+right: 0;
+}
+
+.loaded .loader-wrapper > .loader {
+opacity: 0;
+transition: all 0.3s ease-out;
+}
+
+.loaded .loader-wrapper > .loader-section {
+transition: all 0.3s 0.3s ease-out;
+}
+
+.loaded .loader-wrapper > .loader-section.loader-section-left {
+-webkit-transform: translateX(-100%);
+-ms-transform: translateX(-100%);
+transform: translateX(-100%);
+}
+
+.loaded .loader-wrapper > .loader-section.loader-section-right {
+-webkit-transform: translateX(100%);
+-ms-transform: translateX(100%);
+transform: translateX(100%);
+}
+
+.loaded .loader-wrapper {
+visibility: hidden;
+-webkit-transform: translateY(-100%);
+-ms-transform: translateY(-100%);
+transform: translateY(-100%);
+transition: all 0.3s 0.6s ease-out
+}
+  </style>
+
+<script>
+ (function($) {
+  $(function() {
+    var VDMApp = (function() {
+      var win = $(window);
+      var page = $("html,body");
+      var scrollOffset = -95;
+      var controller;
+
+      var addLoadedClassOnImagesLoaded = function addLoadedClassOnImagesLoaded() {
+        $('.slideshow').imagesLoaded()
+          .done(function(instance) {
+            $('body').addClass('loaded');
+          })
+          .fail(function() {
+            console.warn('all images loaded, at least one is broken');
+            $('body').addClass('loaded');
+          });
+      };
+
+      var initTyped = function initTyped() {
+        $('.main-intro-typed').typed({
+          stringsElement: $('.main-intro-strings'),
+          backDelay: 1000,
+        });
+      };
+
+      var initFlexslider = function initFlexslider() {
+        $('.flexslider').flexslider({
+          slideshowSpeed: 4500,
+          animationSpeed: 5000,
+          controlNav: false,
+          directionNav: false
+        });
+      };
+
+      // Open external links in new tabs; credit: http://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
+      var openExternalLinksInNewTabs = function openExternalLinksInNewTabs() {
+        $('a').each(function() {
+          var a = new RegExp('/' + window.location.host + '/');
+          if(!a.test(this.href)) {
+            $(this).click(function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                window.open(this.href, '_blank');
+            });
+          }
+        });
+      };
+
+      var initLocalScroll = function initLocalScroll() {
+        $('.nav li > a').on('click', function(e) {
+          e.preventDefault();
+          var hash = e.target.hash;
+          TweenMax.to(window, 0.5, {scrollTo: {y: hash, offsetY: 91}});
+          $('.nav li').removeClass('active');
+          $(this).parent('li').addClass('active');
+        });
+      };
+      
+      var resetActiveClassOnLoad = function resetActiveClassOnLoad() {
+        // Fix for what seems to be Firefox clicking the last nav link on load in Codepen
+        setTimeout(function() {
+          $('.nav li:first-of-type > a').click();
+        }, 500);
+      };
+
+      var enableScrollMagic = function enableScrollMagic() {
+        if (!Modernizr.touch) {
+          controller = new ScrollMagic.Controller();
+          var scene1 = new ScrollMagic.Scene({
+            duration: 800
+          }).setTween('.copy', {
+            autoAlpha: 0,
+            y: 120
+          });
+
+          var fromLeftVars = {
+            x: -80,
+            autoAlpha: 0
+          };
+
+          var fromRightVars = {
+            x: 80,
+            autoAlpha: 0
+          };
+
+          var servicesOptions = {
+            offset: 120,
+            triggerElement: '#services',
+            triggerHook: 'onEnter'
+          };
+
+          var offerTween = TweenMax.from('.offer', 0.8, fromLeftVars);
+          var wpTween = TweenMax.from('.why-mobile-friendly', 0.8, fromRightVars);
+          var scene2 = new ScrollMagic.Scene(servicesOptions).setTween(offerTween);
+          var scene3 = new ScrollMagic.Scene(servicesOptions).setTween(wpTween);
+
+          var fromBottomVars = {
+            y: 30,
+            autoAlpha: 0
+          };
+
+          var tl1 = new TimelineMax();
+          var pRow1Options = {
+            offset: 50,
+            triggerElement: '.p-row1',
+            triggerHook: 'onEnter'
+          };
+
+          var item1Tween = TweenMax.from('.item1', 0.25, fromBottomVars);
+          var item2Tween = TweenMax.from('.item2', 0.25, fromBottomVars);
+          var item3Tween = TweenMax.from('.item3', 0.25, fromBottomVars);
+          tl1.add(item1Tween);
+          tl1.add(item2Tween);
+          tl1.add(item3Tween);
+          var scene4 = new ScrollMagic.Scene(pRow1Options).setTween(tl1);
+          var tl2 = new TimelineMax();
+          var pRow2Options = {
+            offset: 50,
+            triggerElement: '.p-row2',
+            triggerHook: 'onEnter'
+          };
+
+          var item4Tween = TweenMax.from('.item4', 0.25, fromBottomVars);
+          var item5Tween = TweenMax.from('.item5', 0.25, fromBottomVars);
+          var item6Tween = TweenMax.from('.item6', 0.25, fromBottomVars);
+          tl2.add(item4Tween);
+          tl2.add(item5Tween);
+          tl2.add(item6Tween);
+          var scene5 = new ScrollMagic.Scene(pRow2Options).setTween(tl2);                
+          var tl3 = new TimelineMax();
+          var pRow3Options = {
+            offset: 50,
+            triggerElement: '.p-row3',
+            triggerHook: 'onEnter'
+          };
+
+          var item7Tween = TweenMax.from('.item7', 0.25, fromBottomVars);
+          var item8Tween = TweenMax.from('.item8', 0.25, fromBottomVars);
+          var item9Tween = TweenMax.from('.item9', 0.25, fromBottomVars);
+          tl3.add(item7Tween);
+          tl3.add(item8Tween);
+          tl3.add(item9Tween);
+          var scene6 = new ScrollMagic.Scene(pRow3Options).setTween(tl3);          
+          var aboutOptions = {
+            offset: 120,
+            triggerElement: '#about',
+            triggerHook: 'onEnter'
+          };
+
+          var aboutTween = TweenMax.from('.about-animated', 0.8, fromLeftVars);
+          var capabilitiesTween = TweenMax.from('.capabilities', 0.8, fromRightVars);
+          var scene7 = new ScrollMagic.Scene(aboutOptions).setTween(aboutTween);
+          var scene8 = new ScrollMagic.Scene(aboutOptions).setTween(capabilitiesTween);          
+          var pinOptions = {
+            duration: 130,
+            offset: -90,
+            triggerElement: '#map',
+            triggerHook: 'onLeave'
+          };
+
+          var scene9 = new ScrollMagic.Scene(pinOptions).setPin('.contact-info');
+          var scene10 = new ScrollMagic.Scene(pinOptions).setPin('#contact .textwidget');
+          controller.addScene([
+            scene1,
+            scene2,
+            scene3,
+            scene4,
+            scene5,
+            scene6,
+            scene7,
+            scene8,
+            scene9,
+            scene10
+          ]);
+        }
+      };
+
+      var disableScrollMagic = function disableScrollMagic() {
+        if (controller) {
+          controller.destroy(true);
+          TweenMax.set('*', {
+            autoAlpha: 1,
+            x: 0,
+            y: 0
+          });
+        }
+      };
+
+      var enableOrDisableScrollMagic = function enableOrDisableScrollMagic() {
+        enquire.register("screen and (min-width: 1260px)", {
+          match : function() {
+            enableScrollMagic();
+          },  
+          unmatch : function() {
+            disableScrollMagic();
+          }
+        });
+      };
+
+      var toggleDescriptionOnHover = function toggleDescriptionOnHover() {
+        $('.item').find('.description').hide();
+        $('.item').on('mouseenter', function() {
+          $(this).find('.description').fadeIn();
+        }).on('mouseleave', function() {
+          $(this).find('.description').fadeOut();
+        });
+      };
+
+      var initGoogleMap = function initGoogleMap() {
+        // Basic options for a simple Google Map
+        // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+        var mapOptions = {
+            // How zoomed in you want the map to start at (always required)
+            zoom: 14,
+
+            // The latitude and longitude to center the map (always required)
+            center: new google.maps.LatLng(40.763316,-73.948631), // New York
+
+            // How you would like to style the map. 
+            // This is where you would paste any style found on Snazzy Maps.
+            styles: [{featureType:"landscape",stylers:[{saturation:-100},{lightness:65},{visibility:"on"}]},{featureType:"poi",stylers:[{saturation:-100},{lightness:51},{visibility:"simplified"}]},{featureType:"road.highway",stylers:[{saturation:-100},{visibility:"simplified"}]},{featureType:"road.arterial",stylers:[{saturation:-100},{lightness:30},{visibility:"on"}]},{featureType:"road.local",stylers:[{saturation:-100},{lightness:40},{visibility:"on"}]},{featureType:"transit",stylers:[{saturation:-100},{visibility:"simplified"}]},{featureType:"administrative.province",stylers:[{visibility:"off"}]/**/},{featureType:"administrative.locality",stylers:[{visibility:"off"}]},{featureType:"administrative.neighborhood",stylers:[{visibility:"on"}]/**/},{featureType:"water",elementType:"labels",stylers:[{visibility:"on"},{lightness:-25},{saturation:-100}]},{featureType:"water",elementType:"geometry",stylers:[{hue:"#ffff00"},{lightness:-25},{saturation:-97}]}]
+        };
+
+        // Get the HTML DOM element that will contain your map 
+        // We are using a div with id="map" seen below in the <body>
+        var mapElement = document.getElementById('map');
+
+        // Create the Google Map using out element and options defined above
+        var map = new google.maps.Map(mapElement, mapOptions);
+      };
+
+      var initGoogleMapOnWindowLoad = function initGoogleMapOnWindowLoad() {
+        // When the window has finished loading create the google map below
+        google.maps.event.addDomListener(window, 'load', initGoogleMap);
+      };
+
+      var handleSubmit = function handleSubmit() {
+        $('.contact-form').on('submit', function(e) {
+          e.preventDefault();
+          var name = $('.your-name').val();
+          var email = $('.your-email').val();
+          var subject = $('.your-subject').val();
+          var message = $('.your-message').val();
+          emailjs.send('mailgun', 'codepen_portfolio_contact_form',{
+            name: name, 
+            email: email,
+            subject: subject,
+            message: message
+          })
+            .then(function(response) {
+              $('.response-output').addClass('success')
+                .html('Your message was sent successfully.');
+            }, function(err) {
+              $('.response-output').addClass('error')
+                .html('Sorry, there was an error in sending your message.');
+            });
+        });
+      };
+
+      return {
+        init: function() {
+          addLoadedClassOnImagesLoaded();
+          initTyped();
+          initFlexslider();
+          openExternalLinksInNewTabs();
+          initLocalScroll();     
+          resetActiveClassOnLoad();
+          enableOrDisableScrollMagic();
+          toggleDescriptionOnHover();          
+          initGoogleMapOnWindowLoad();
+          handleSubmit();
+        },
+      };
+    })(); 
+
+    VDMApp.init();        
+  });
+})(jQuery);
+</script>
+
+	<style>
+		html {
+  box-sizing: border-box;
+  --bgColorMenu: #1d1d27;
+  --duration: 0.7s;
+}
+
+html *,
+html *::before,
+html *::after {
+  box-sizing: inherit;
+}
+
+
+.menu {
+  margin: 0;
+  display: flex;
+  /* Works well with 100% width  */
+  width: 100%;
+  font-size: 1.5em;
+  padding: 0 2.85em;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bgColorMenu);
+
+  bottom: 0;
+
+  z-index: 5;
+}
+
+.menu__item {
+  all: unset;
+  flex-grow: 1;
+  z-index: 100;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  align-items: center;
+  will-change: transform;
+  justify-content: center;
+  padding: 0.55em 0 0.85em;
+  transition: transform var(--timeOut, var(--duration));
+}
+
+.menu__item::before {
+  content: "";
+  z-index: -1;
+  width: 4.2em;
+  height: 4.2em;
+  border-radius: 50%;
+  position: absolute;
+  transform: scale(0);
+  transition: background-color var(--duration), transform var(--duration);
+}
+
+.menu__item.active {
+  transform: translate3d(0, -0.8em, 0);
+}
+
+.menu__item.active::before {
+  transform: scale(1);
+  background-color: var(--bgColorItem);
+}
+
+.icon {
+  width: 2.6em;
+  height: 2.6em;
+  stroke: white;
+  fill: transparent;
+  stroke-width: 1pt;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+}
+
+.menu__item.active .icon {
+  animation: strok 1.5s reverse;
+}
+
+@keyframes strok {
+  100% {
+    stroke-dashoffset: 400;
+  }
+}
+
+.menu__border {
+  left: 0;
+  bottom: 99%;
+  width: 10.9em;
+  height: 2.4em;
+  position: absolute;
+  clip-path: url(#menu);
+  will-change: transform;
+  background-color: var(--bgColorMenu);
+  transition: transform var(--timeOut, var(--duration));
+}
+
+.svg-container {
+  width: 0;
+  height: 0;
+}
+
+@media screen and (max-width: 50em) {
+  .menu {
+    font-size: 0.8em;
+  }
+}
+
+	</style>
+
+<script>
+	// Designed by:  Mauricio Bucardo
+// Original image:
+// https://dribbble.com/shots/5619509-Animated-Tab-Bar
+
+"use strict";
+
+const body = document.body;
+const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
+const menu = body.querySelector(".menu");
+const menuItems = menu.querySelectorAll(".menu__item");
+const menuBorder = menu.querySelector(".menu__border");
+let activeItem = menu.querySelector(".active");
+
+function clickItem(item, index) {
+  menu.style.removeProperty("--timeOut");
+
+  if (activeItem == item) return;
+
+  if (activeItem) {
+    activeItem.classList.remove("active");
+  }
+
+  item.classList.add("active");
+  body.style.backgroundColor = bgColorsBody[index];
+  activeItem = item;
+  offsetMenuBorder(activeItem, menuBorder);
+}
+
+function offsetMenuBorder(element, menuBorder) {
+  const offsetActiveItem = element.getBoundingClientRect();
+  const left =
+    Math.floor(
+      offsetActiveItem.left -
+        menu.offsetLeft -
+        (menuBorder.offsetWidth - offsetActiveItem.width) / 2
+    ) + "px";
+  menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
+}
+
+offsetMenuBorder(activeItem, menuBorder);
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => clickItem(item, index));
+});
+
+window.addEventListener("resize", () => {
+  offsetMenuBorder(activeItem, menuBorder);
+  menu.style.setProperty("--timeOut", "none");
+});
+
+</script>
+
+
+
+
+<header class="header">
+    <div class="nav container">
+      
+      
+        <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>
+        
+            <ul class="menu__box">
+                <img id="profile" src="https://st3.depositphotos.com/26272052/32793/v/450/depositphotos_327937984-stock-illustration-gold-line-rubik-cube-icon.jpg" style="border-radius: 50%; width: 150px; display: block; margin: auto;">
+                <br>
+              <li><a class="menu__a" href="#">Matematizar</a></li>
+              <li><a class="menu__a" href="#">Jogos</a></li>
+              <li><a class="menu__a" href="#">Atividades</a></li>
+              <li><a class="menu__a" href="#">Contato</a></li>
+              <li><a class="menu__a" href="#">Sobre</a></li>
+            </ul>
+          </div>
+
+          <style>
+            #menu__toggle {
+  opacity: 0;
+}
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  left: 0 !important;
+}
+.menu__btn {
+  position: fixed;
+  top: 25px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 7;
+}
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #616161;
+  transition-duration: .25s;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+.menu__box {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #ECEFF1;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  transition-duration: .25s;
+  
+  z-index: 6;
+}
+.menu__a {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+
+  text-align: center;
+}
+.menu__a:hover {
+  background-color: #CFD8DC;
+}
+          </style>
+
+        <a class="logo" href="#" style="font-size: 20px; text-align: left;color: white;">Matematizar</a>
+        <i id="cart-icon" class='bx bx-shopping-bag'></i>
+    <!-- CART -->
+        <div class="cart">
+            <h2 class="cart-title">Your Cart</h2>
+
+            <div class="cart-content">
+
+            </div>
+            <!-- total -->
+            <div class="total">
+                <div class="total-title">Total</div>
+                <div class="total-price">$0</div>
+            </div>
+            <!-- buy button -->
+            <button class="btn-buy" type="button">Buy Now</button>
+            <!-- cart close -->
+            <i id="close-cart" class='bx bx-x'></i>
+        </div>
+
+    </div>
+</header>
+
+<section class="shop container">
+    <h2 class="section-title" id="jogos" style="font-size: 25px;">Jogos</h2>
+
+<style>
+  #jogos{
+    position:relative;
+    width: 150px;
+    margin: auto;
+  }
+  #jogos:before{
+    content:"";
+  z-index:-1;
+  left:-0.5em;
+  top: 0.1em;
+  border-width:2px;
+  border-style:solid;
+  border-color:red;
+  position:absolute;
+  border-right-color:transparent;
+  width:100%;
+  height:1em;
+  transform:rotate(2deg);
+  opacity:0.7;
+  border-radius:50%;
+  padding:0.1em 0.25em;
+  }
+  #jogos:after{
+    content:"";
+  z-index:-1;
+  left:-0.5em;
+  top: 0.2em;
+  padding:0.1em 0.25em;
+  border-width:2px;
+  border-style:solid;
+  border-color:red;
+  border-left-color:transparent;
+  border-top-color:transparent;
+  position:absolute;
+  width:100%;
+  height:1em;
+  transform:rotate(-1deg);
+  opacity:0.7;
+  border-radius:50%;
+  }
+</style>
+    <div class="slider">
+        <div class="slide">
+            <div id="unique">
+            <a href="abaco.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/841/841540.png" alt="">
+              </a>
+                <p style="text-align: center; font-size: 18px;">Ábaco</p>
+          </div>
+        </div>
+        <!--
+        <div class="slide">
+            <div id="unique">
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/5363/5363916.png" alt="">
+              </a>
+                <p style="text-align: center; font-size: 18px;">Super Mercado</p>
+        </div>
+     </div>
+        <div class="slide">
+            <div id="unique">
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/8263/8263075.png" alt="">
+              </a>
+            <p style="text-align: center; font-size: 18px;">Meu Material Escolar</p>
+        </div>
+     </div>
+    -->
+        <div class="slide">
+            <div id="unique">
+            <a href="mercad.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/448/448003.png" alt="">
+              </a>
+            <p style="text-align: center; font-size: 18px;">Hora do Bolo</p>
+        </div>
+        </div>
+        <div class="slide">
+            <div id="unique">
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/5988/5988246.png" alt=""></div>
+              </a>
+                <p style="text-align: center; font-size: 18px;">Linhas</p>
+            </div>
+        <div class="slide">
+            <div id="unique">
+            <a href="ae.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/2490/2490315.png" alt=""></div>
+              </a>
+            <p style="text-align: center; font-size: 18px;">Arme e Efetue</p>
+        </div>
+        <div class="slide">
+          <div id="unique">
+          <a href="#">
+              <img src="https://cdn1.iconfinder.com/data/icons/cube-one/64/Gold-512.png" alt="">
+            </a>
+          <p style="text-align: center; font-size: 18px;">Material Dourado</p>
+      </div>
+      </div>
+      </div>
+
+        <script>
+         const slider = document.querySelector('.slider');
+let isDown = false;
+let startX;
+let sLeft;
+slider.scrollLeft = 0;
+
+slider.addEventListener('pointerdown', (e) => {
+isDown = true;
+startX = e.pageX;
+sLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('pointerleave', () => {
+isDown = false;
+});
+slider.addEventListener('pointerup', () => {
+isDown = false;
+});
+
+slider.addEventListener('pointermove', (e) => {
+if(!isDown) return;
+e.preventDefault();
+const x = e.pageX;
+const dragged = x - startX;
+slider.scrollLeft = sLeft - dragged;
+}); 
+        </script>
+        
+<style>
+  .slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 22%;
+  gap: 1rem;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin-top: 5rem;
+  padding-inline: 1rem;
+}
+.slide{
+    transition: all 0.5s ease-out;
+}
+#unique:hover {
+transform: scale3d(1.2, 1.2, 1);
+box-shadow: none;
+transition: all 0.5s ease-out;
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}
+.slide img {
+  inline-size: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: .2rem;
+}
+@media (max-width: 440px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+  .slider {
+    grid-auto-columns: 40%;
+  }
+}
+</style>
+
+
+<br>
+<br>
+<h2 class="section-title" id="jogos">Criar</h2><p></p>
+<br>
+<div class="in">
+  <br>
+
+<br>
+<img class="box" style="position: relative; right: 5px; margin-right: 20px;" src="https://cdn-icons-png.flaticon.com/512/11285/11285589.png">
+</div>
+
+<br>
+
+
+<style>
+  @media (min-width: 1200px){
+    .in{background-size: 100%; background-repeat: no-repeat; background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20240703/pngtree-green-chalkboard-background-with-chalk-drawings-image_15932409.jpg');
+  border: solid rgb(110, 62, 17) 5px;
+  color:#086788; 
+  width: 50%;
+  margin: auto;
+  text-align: center;
+    }
+  .box{
+    margin-top: 50px;
+  width: 100px;
+    }
+  }
+  @media only screen and (max-width: 600px){
+    .in{background-size: cover; background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20240703/pngtree-green-chalkboard-background-with-chalk-drawings-image_15932409.jpg');
+  border: solid rgb(110, 62, 17) 5px;
+  color:#086788; 
+  width: 200px;
+  margin: auto;
+  text-align: center;
+    }
+    .box{
+  margin-left: 30px;
+  width: 50px;
+}
+}
+.box{
+  cursor: pointer;
+}
+</style>
+<br>
+<br>
+<br>
+<br>
+
+
+</section>
+</body>
+
+<style>
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-padding-top: 2rem;
+	scroll-behavior: smooth;
+}
+body{
+    user-select: none;
+}
+
+body{
+    background-image: url(https://cdn.pixabay.com/photo/2016/12/28/01/44/leaf-notebook-1935230_960_720.jpg);
+    background-size: cover;
+    background-repeat: repeat;
+    user-select: none;
+}
+:root {
+	--main-color: #fd4646;
+	--text-color: #171427;
+	--bg-color: #171427
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	color: var(--text-color);
+	font-weight: 400;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	width: 100%;
+}
+
+/* ==========  ==================== */
+
+.container {
+	max-width: 1068px;
+	margin: auto;
+	width: 100%;
+}
+
+section {
+	padding: 4rem 0 3rem;
+}
+
+/* ========== HEADER ==================== */
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: var(--bg-color);
+	box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
+	z-index: 100;
+
+
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.logo {
+	font-size: 1.1rem;
+	color: var(--text-color);
+}
+
+#cart-icon {
+	font-size: 1.8rem;
+	cursor: pointer;
+}
+
+/* ========== CART ==================== */
+.cart {
+	position: fixed;
+	top: 0;
+	right: -100%;
+	width: 360px;
+	min-height: 100vh;
+	padding: 20px;
+	background-color: var(--bg-color);
+	box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
+	transition: right 0.3s;
+}
+
+.cart.active {
+	right: 0;
+}
+
+.cart-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.cart-box {
+	display: grid;
+	grid-template-columns: 32% 50% 18%;
+	gap: 1rem;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+.cart-img {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	padding: 10px;
+}
+
+.detail-box {
+	display: grid;
+	row-gap: 0.5rem;
+}
+
+.cart-product-title {
+	font-size: 1rem;
+	text-transform: uppercase;
+}
+
+.cart-price {
+	font-weight: 500;
+}
+
+.cart-quantity {
+	border: 1px solid var(--text-color);
+	outline-color: var(--main-color);
+	width: 2.4rem;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.cart-remove {
+	font-size: 1.5rem;
+	color: var(--main-color);
+	cursor: pointer;
+}
+
+.total {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+	border-top: 1px solid var(--text-color);
+}
+
+.total-title {
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.total-price {
+	margin-left: 0.5rem;
+}
+
+.btn-buy {
+	display: flex;
+	margin: 1.5rem auto 0 auto;
+	padding: 12px 20px;
+	font-size: 1rem;
+	font-weight: 500;
+	border: none;
+	background-color: var(--main-color);
+	color: var(--bg-color);
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-buy:hover {
+	background-color: var(--text-color);
+}
+
+#close-cart {
+	position: absolute;
+	top: 1rem;
+	right: 0.8rem;
+	color: var(--text-color);
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+
+.shop {
+	margin-top: 2rem;
+}
+
+.section-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+/* ========== SHOP CONTENT ==================== */
+.shop-content {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+	gap: 1.5rem;
+}
+
+.product-box {
+	position: relative;
+}
+
+.product-box:hover {
+	padding: 10px;
+	border: 1px solid var(--text-color);
+	transition: padding 0.4s;
+}
+
+.product-img {
+	width: 100%;
+	height: 300px;
+	margin-bottom: 0.5rem;
+  	object-fit: cover;
+}
+
+.product-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+}
+
+.price {
+	font-weight: 500;
+}
+
+.add-cart {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: var(--text-color);
+	color: var(--bg-color);
+	padding: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.add-cart:hover {
+	background-color: rgba(23, 20, 39, 0.8);
+}
+
+/* ========== Breakpoints ==================== */
+@media (max-width: 1080px) {
+	.nav {
+		padding: 15px;
+	}
+
+	section {
+		padding: 3rem 0 2rem;
+	}
+
+	.container {
+		margin: 0 auto;
+		width: 90%;
+	}
+
+	.shop {
+		margin-top: 2rem !important;
+	}
+}
+
+@media (max-width: 400px) {
+	.nav {
+		padding: 11px;
+	}
+
+	.logo {
+		font-size: 1rem;
+	}
+
+	.cart {
+		width: 320px;
+	}
+}
+
+@media (max-width: 360px) {
+	.shop {
+		margin-top: 1rem !important;
+	}
+
+	.cart {
+		width: 280px;
+	}
+}
+</style>
+</html>
