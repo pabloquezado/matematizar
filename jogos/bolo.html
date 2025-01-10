@@ -1,75 +1,703 @@
-<div class="paper">
-  <div class="lines">
-    <div class="text" contenteditable spellcheck="false">
-      1) Resolva o problema: <br /><br />
-      Joãozinho tem 2 balas. No meio do caminho encontrou 3 amigos e deu 2 balas para cada um. Com quantas balas Joãozinho ficou?</div>
-  </div>
-  <div class="holes hole-top"></div>
-  <div class="holes hole-middle"></div>
-  <div class="holes hole-bottom"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MateMátika</title>
+</head>
+<body>
+<style>
+.pwGuide .pwList {
+  position: absolute;
+  top: 300px;
+  left: 180px;
+  width: 194px;
+  height: 450x;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: inset 3px 0 0 #cfdae1;
+  font-family: 'Special Elite', cursive;
+  font-size: 12px;
+}
+.pwGuide .pwList:before {
+  content: '';
+  width: 2px;
+  height: 100%;
+  background: #e45998;
+  position: absolute;
+  left: 22px;
+}
+.pwGuide .pwList ul {
+  padding: 13px 0 0 0;
+}
+.pwGuide .pwList ul li {
+  padding-bottom: 3px;
+  margin-bottom: 6px;
+  padding-left: 34px;
+  border-bottom: 1px solid #d8cbf5;
+  list-style-type: none;
+}
+.pwGuide .pwList ul li span {
+  position: relative;
+  color: #423666;
+}
+.pwGuide .pwList ul li span:after {
+  content: '';
+  width: 100%;
+  height: 3px;
+  background: #e37272;
+  position: absolute;
+  left: 0;
+  top: 7px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+.pwGuide .pwList ul li span.valid:after {
+  transform: scaleX(1);
+}
+.pwGuide .pwCheck {
+  position: absolute;
+  fill: none;
+  top: 84px;
+  right: 10px;
+}
+.pwCheck {
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.86, 0.45, 0.72, 1.2);
+}
+.pwCheck.pwValid {
+  transform: scale(1);
+}
+</style>
+  <div class="centerizar">
+ <p id="ingre" style="margin-top: -7px;">7 copos de leite:</p>
+ <p class="am" style="background-color: white; width: 20%; margin: auto; border: solid black 1px;" id="im">0</p>
 </div>
 
+<div class="pwGuide">
+  <div class="pwList">
+      <ul>
+          <li><span id="hsh1">7 copos de leite</span></li>
+          <li><span id="hsh2">3 colheres de margarina</span></li>
+          <li><span id="hsh3">2 ovos</span></li>
+          <li><span id="hsh4">5 gotas de baunilha</span></li>
+          <li><span id="hsh5">7 copos de farinha de trigo</span></li>
+          <li><span id="hsh6">7 colheres de açúcar</span></li>
+          <li><span id="hsh7">1 colher de fermento em pó</span></li>
+      </ul>
+</div>
+</div>
+
+<img src="uni.png" class="dourado" id="uni">
+<img src="uni.png" class="dourado" style="left: 100px;" id="uni2">
+<img src="uni.png" class="dourado" style="left: 100px;" id="uni3">
+<img src="uni.png" class="dourado" style="left: 100px;" id="uni4">
+<img src="uni.png" class="dourado" style="left: 100px;" id="uni5"> 
+<img src="uni.png" class="dourado" style="left: 100px;" id="uni6">
+<img src="uni.png" class="dourado" style="left: 100px;" id="uni7">
+
 <style>
+  .dourado{
+    visibility: hidden;
+  }
+  .centerizar{
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+  }
+  .am{
+    font-size: 40px;
+  }
+</style>
+    
+<button class="modal" id="botao">Continuar</button>
 
-  @import url(https://fonts.googleapis.com/css?family=Indie+Flower);
-body {
-  margin: 0;
-  padding: 0;
-  background: lightgoldenrodyellow;
-}
-.paper {
-  position: absolute;
-  height: 550px;
-  width: 450px;
-  background: rgba(255,255,255,0.9);
-  margin: -275px -225px;
-  left: 50%;
-  top: 50%;
-  box-shadow: 0px 0px 5px 0px #888;
-}
-.paper::before {
-    position: absolute;
-  top: 65px;
-  left: 55px;
-  bottom: 10px;
-  right: 10px;
-  line-height: 25px;
-  font-family: 'Indie Flower';
-  overflow: hidden;
-  outline: none;
-}
-.holes {
-  position: absolute;
-  left: 10px;
-  height: 25px;
-  width: 25px;
-  background: lightgoldenrodyellow;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 2px 0px #888;
-}
-.hole-top {
-  top: 10%;
-}
-.hole-middle {
-  top: 50%;
-}
-.hole-bottom {
-  bottom: 10%;
-}
-  content: '';
-  position: absolute;
-  left: 45px;
-  height: 100%;
-  width: 2px;
-  background: rgba(255,0,0,0.4);
-}
-.lines {
-  margin-top: 40px;
-  height: calc(100% - 40px);
+<style>
+button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0 1rem;
+  text-transform: uppercase;
 
-  
+  top: 350px;
+  position: absolute;
+}
+button:hover {
+  color: #111;
+}
+button.modal {
+  background: rgb(74, 101, 255);
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  position: fixed;
+  right: 130px;
+  padding: 1rem;
+visibility: hidden;
+}
 </style>
 
 <script>
-  
+ 
 </script>
+
+  <div class="showcase">
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">2 Ovos</span>
+    </div>
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">3 colheres de margarina</span>
+    </div>
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">1 colher (sopa) fermento em pó</span>
+    </div>
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">7 copos de leite (100ml)</span>
+    </div>
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">7 Colheres (sopa) de açúcar</span>
+    </div>
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">5Gotas de baunilha</span>
+    </div>
+    <div class="project">
+      <img class="project-img" src="https://png.pngtree.com/png-vector/20241002/ourmid/pngtree-a-glass-of-milk-isolated-on-white-transparent-background-png-image_13998585.png" />
+      <span class="project-name">7 copo de farinha de trigo (100g)</span>
+    </div>
+    <div class="drop">SOLTE AQUI</div>
+  </div>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  overflow: hidden;
+
+  background-image: url('bgw.png');
+  background-size: contain;
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  border-radius: 50%;
+  text-align: center;
+  transition: 0.5s;
+}
+
+.project {
+  width: 80px;
+  flex-shrink: 0;
+  margin: 0 10px;
+  height: 80px;
+  border-radius: 50%;
+  user-select: none;
+  cursor: pointer;
+  left: 0;
+  transition: 0.4s;
+  top: 0;
+  position: relative;
+  z-index: 1;
+  transform-origin: center;
+}
+
+.project-name {
+  position: absolute;
+  width: 140px;
+  text-align: center;
+  left: 50%;
+  top: 100%;
+  font-size: 14px;
+  transition: 0.3s;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(0) scale(0.8);
+  z-index: -1;
+}
+@media (max-width: 768px) {
+  .project-name {
+    display: none;
+  }
+}
+
+.project:hover {
+  z-index: 2;
+}
+
+.project:hover > .project-name {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(10px) scale(1);
+}
+
+.project.is-selected {
+  z-index: 2;
+}
+
+.project.is-selected > .project-img {
+  box-shadow: 0 0 0 6px red;
+}
+
+.showcase.is-dragging .project {
+  pointer-events: none;
+  transition: none;
+}
+
+.showcase.is-dragging .drop {
+  border-color: red;
+  color: red;
+}
+
+.drop {
+  background-color: white;
+  position: fixed;
+  bottom: 20px;
+  left: calc(50% - 45px);
+  width: 90px;
+  height: 90px;
+  border: 3px solid #ddd;
+  color: #b7b7b7;
+  border-radius: 50%;
+  transition: 0.5s;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px;
+  user-select: none;
+}
+
+.drop.is-ready {
+  color: transparent;
+  background-color: red;
+  transform: scale(1.3);
+}
+
+.drop.is-dropped {
+  z-index: 3;
+  background-color: red;
+  border-color: red;
+  color: #fff;
+  font-size: 12px;
+  width: 64px;
+  height: 64px;
+  left: calc(50% - 32px);
+  cursor: pointer;
+}
+.project.is-expanded > .project-name {
+  display: none;
+}
+
+.showcase {
+  height: 570px;
+  overflow: hidden;
+  justify-content: space-evenly;
+  align-items: center;
+  display: block;
+  top: 200px;
+}
+  </style>
+  <script>
+    const projects = document.querySelectorAll(".project");
+const drop = document.querySelector(".drop");
+const showcase = document.querySelector(".showcase");
+
+let start,
+  offsetY,
+  offsetX,
+  targetRect,
+  target,
+  dropped = false,
+  expanded = false;
+
+const stopped = () => {
+  start = false;
+  if (target) {
+    showcase.classList.remove("is-dragging");
+    target.classList.remove("is-selected");
+    drop.classList.remove("is-active");
+    drop.classList.remove("is-ready");
+  }
+  if (dropped) {
+    showcase.classList.add("is-preview");
+    target.classList.add("is-expanded");
+
+    score += 1;
+    const letra = document.getElementById("im");
+    letra.textContent = score;
+
+    dropped = false;
+    target.style.visibility = "hidden";
+    expanded = false;
+    
+    if(score == 1){
+    const unidade = document.getElementById("uni");
+    unidade.style = "visibility: visible";
+    
+    const ingredientes = document.getElementById("ingre");
+if(ingredientes.textContent.match(/(^|\W)fermento($|\W)/)) {
+    const continuar = document.getElementById("botao");
+    continuar.style = "visibility: visible";
+    continuar.addEventListener('pointerdown', function(e) {
+    continuar.style = "visibility: hidden";
+
+//podeContinuar();
+const hash7 = document.getElementById("hsh7");
+hash7.classList.add('valid');
+congrat = new Audio('congrat.wav')
+const ingredientes = document.getElementById("ingre");
+ingredientes.textContent = 'Muito bem!';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+setTimeout(() => {
+    congrat.play();
+    }, 1000);
+podeContinuar4();
+});
+}
+    }
+    if(score == 2){
+    const hash3 = document.getElementById("hsh3");
+    const unidade2 = document.getElementById("uni2");
+    unidade2.style = "visibility: visible";
+ 
+    const ingredientes = document.getElementById("ingre");
+if(ingredientes.textContent.match(/(^|\W)ovos($|\W)/)) {
+    const continuar = document.getElementById("botao");
+    continuar.style = "visibility: visible";
+    continuar.addEventListener('pointerdown', function(e) {
+    hash3.classList.add('valid');
+    continuar.style = "visibility: hidden";
+
+podeContinuar();
+const ingredientes = document.getElementById("ingre");
+ingredientes.textContent = '5 gotas de baunilha';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+      var elems = document.getElementsByClassName("project-img");
+for (var i = 0; i < elems.length; i+= 1) {
+    elems[i].src = "https://media.istockphoto.com/id/1410402315/vector/vanilla-oil.jpg?s=612x612&w=0&k=20&c=OapbvBRa84Z4hqh-yT09POOHOdJrPElQlMuDCxpT--A=";
+}
+});
+
+}else {
+  }
+    }
+    if(score == 3){
+    const hash2 = document.getElementById("hsh2");
+    const unidade3 = document.getElementById("uni3");
+    unidade3.style = "visibility: visible";
+   
+    const ingredientes = document.getElementById("ingre");
+if(ingredientes.textContent.match(/(^|\W)margarina($|\W)/)) {
+    const continuar = document.getElementById("botao");
+    continuar.style = "visibility: visible";
+    continuar.addEventListener('pointerdown', function(e) {
+    hash2.classList.add('valid');
+    continuar.style = "visibility: hidden";
+
+podeContinuar();
+const ingredientes = document.getElementById("ingre");
+ingredientes.textContent = '2 ovos';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+      var elems = document.getElementsByClassName("project-img");
+for (var i = 0; i < elems.length; i+= 1) {
+    elems[i].src = "https://static.vecteezy.com/system/resources/previews/014/033/640/non_2x/broken-egg-transparent-background-free-png.png";
+}
+});
+
+}else {
+  }
+  }
+    if(score == 4){
+    const unidade4 = document.getElementById("uni4");
+    unidade4.style = "visibility: visible";
+    }
+    if(score == 5){
+    const hash4 = document.getElementById("hsh4");
+    const unidade5 = document.getElementById("uni5");
+    unidade5.style = "visibility: visible";
+
+    const ingredientes = document.getElementById("ingre");
+if(ingredientes.textContent.match(/(^|\W)baunilha($|\W)/)) {
+    const continuar = document.getElementById("botao");
+    continuar.style = "visibility: visible";
+    continuar.addEventListener('pointerdown', function(e) {
+    hash4.classList.add('valid');
+    continuar.style = "visibility: hidden";
+podeContinuar();
+ingredientes.textContent = '7 copos de farinha de trigo';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+      var elems = document.getElementsByClassName("project-img");
+for (var i = 0; i < elems.length; i+= 1) {
+    elems[i].src = "https://media.istockphoto.com/id/183053629/photo/cup-of-flour.jpg?s=612x612&w=0&k=20&c=GKRiwOK5O_m2YkXqIJgEHDBjGrkR1yv_mIt5X8-BEMM=";
+}
+});
+}else {
+  }
+    }
+    if(score == 6){
+    const unidade6 = document.getElementById("uni6");
+    unidade6.style = "visibility: visible";
+    }
+    if(score == 7){
+    const hash = document.getElementById("hsh1");
+    const unidade7 = document.getElementById("uni7");
+    unidade7.style = "visibility: visible";
+    
+    const continuar = document.getElementById("botao");
+    continuar.style = "visibility: visible";
+
+    continuar.addEventListener('pointerdown', function(e) {
+    hash.classList.add('valid');
+    continuar.style = "visibility: hidden";
+    const ingredientes = document.getElementById("ingre");
+
+  if (ingredientes.textContent.match(/(^|\W)farinha($|\W)/)) {
+  podeContinuar2();
+  const hash5 = document.getElementById("hsh5");
+  hash5.classList.add('valid');
+} else if (ingredientes.textContent.match(/(^|\W)açúcar($|\W)/)) {
+  podeContinuar3();
+  const hash6 = document.getElementById("hsh6");
+  hash6.classList.add('valid');
+} else {
+  podeContinuar();
+}
+});
+    }
+
+  } else {
+    drop.classList.remove("is-dropped");
+    showcase.classList.remove("is-preview");
+    target.classList.remove("is-expanded");
+    drop.textContent = "SOLTE AQUI";
+    expanded = false;
+  }
+};
+
+function podeContinuar(){
+  pop = new Audio('pop.wav');
+  pop.play();
+  var reSetar = document.getElementsByClassName("dourado");
+    for(var i = 0; i < reSetar.length; i++){
+        reSetar[i].style.visibility = "hidden";
+    }
+const ingredientes = document.getElementById("ingre");
+ingredientes.textContent = '3 colheres de margarina';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+
+
+var elems = document.getElementsByClassName("project-img");
+for (var i = 0; i < elems.length; i+= 1) {
+    elems[i].src = "https://img.freepik.com/fotos-premium/manteiga-de-queijo-margarina-em-colher-na-superficie-branca_51524-12674.jpg";
+}
+
+    var vertical = document.getElementsByClassName("showcase");
+    var reSetar2 = document.getElementsByClassName("project");
+    for(var i = 0; i < reSetar2.length; i++){
+
+        reSetar2[i].style.transform = "translateY(1.5px) translateX(-0.5px)";
+        reSetar2[i].style.visibility = "visible";
+    }
+}
+
+function podeContinuar2(){
+  var reSetar = document.getElementsByClassName("dourado");
+    for(var i = 0; i < reSetar.length; i++){
+        reSetar[i].style.visibility = "hidden";
+    }
+const ingredientes = document.getElementById("ingre");
+ingredientes.textContent = '7 colheres de açúcar';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+
+
+var elems = document.getElementsByClassName("project-img");
+for (var i = 0; i < elems.length; i+= 1) {
+    elems[i].src = "https://img.freepik.com/vetores-premium/colher-com-icone-de-desenho-animado-de-acucar-ingrediente-de-cozinha_81894-10016.jpg";
+}
+
+    var vertical = document.getElementsByClassName("showcase");
+    var reSetar2 = document.getElementsByClassName("project");
+    for(var i = 0; i < reSetar2.length; i++){
+
+        reSetar2[i].style.transform = "translateY(1.5px) translateX(-0.5px)";
+        reSetar2[i].style.visibility = "visible";
+    }
+}
+function podeContinuar3(){
+  var reSetar = document.getElementsByClassName("dourado");
+    for(var i = 0; i < reSetar.length; i++){
+        reSetar[i].style.visibility = "hidden";
+    }
+const ingredientes = document.getElementById("ingre");
+ingredientes.textContent = '1 colher de fermento em pó';
+score = 0;
+
+const letra = document.getElementById("im");
+letra.textContent = '0'
+letra.textContent = score;
+
+const hash6 = document.getElementById("hsh6");
+hash6.classList.add('valid');
+
+var elems = document.getElementsByClassName("project-img");
+for (var i = 0; i < elems.length; i+= 1) {
+    elems[i].src = "https://static.vecteezy.com/ti/vetor-gratis/t2/17415043-sal-na-ilustracaoial-de-desenhos-animados-de-colher-de-pau-vetor.jpg";
+}
+
+    var vertical = document.getElementsByClassName("showcase");
+    var reSetar2 = document.getElementsByClassName("project");
+    for(var i = 0; i < reSetar2.length; i++){
+
+        reSetar2[i].style.transform = "translateY(1.5px) translateX(-0.5px)";
+        reSetar2[i].style.visibility = "visible";
+    }
+}
+
+const started = (e, type) => {
+  start = true;
+  target = e.target;
+  if (type === "touch") {
+    console.log(e.touches[0]);
+    offsetY = target.offsetWidth / 2 + target.offsetTop;
+    offsetX = target.offsetWidth / 2 + target.offsetLeft;
+  } else {
+    offsetY = e.offsetY + target.offsetTop;
+    offsetX = e.offsetX + target.offsetLeft;
+  }
+  targetRect = target.getBoundingClientRect();
+  target.classList.add("is-selected");
+  showcase.classList.add("is-dragging");
+};
+
+projects.forEach(project => {
+  project.addEventListener("mousedown", e => {
+    started(e, "mouse");
+  });
+  project.addEventListener("touchstart", e => {
+    started(e, "touch");
+  });
+});
+
+const docUp = () => {
+  if (!expanded && target) {
+    stopped();
+  }
+};
+
+document.addEventListener("mouseup", () => {
+  docUp();
+});
+document.addEventListener("touchend", () => {
+  docUp();
+});
+
+const docMove = (e, type) => {
+  let clientX = 0,
+    clientY = 0;
+
+  if (type === "touch") {
+    clientX = e.touches[0].clientX;
+    clientY = e.touches[0].clientY;
+  } else {
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
+
+  if (
+    clientY > drop.offsetTop &&
+    clientY < drop.offsetTop + drop.offsetHeight &&
+    clientX > drop.offsetLeft &&
+    clientX < drop.offsetLeft + drop.offsetWidth &&
+    start &&
+    !expanded
+  ) {
+    drop.classList.add("is-ready");
+    dropped = true;
+    
+  } else {
+    drop.classList.remove("is-ready");
+    dropped = false;
+  }
+
+  if (start && !expanded) {
+    target.style.transform = `translateY(${clientY -
+      offsetY}px) translateX(${clientX - offsetX}px)`;
+  }
+};
+
+document.addEventListener("mousemove", e => {
+  docMove(e, "mouse");
+});
+document.addEventListener("touchmove", e => {
+  docMove(e, "touch");
+});
+
+var score = 0;
+drop.addEventListener("click", () => {
+  
+
+  if (expanded) {
+
+    score += 1;
+    const letra = document.getElementById("im");
+    letra.textContent = score;
+
+    dropped = false;
+    //target.style.transform = "none";
+    target.style.visibility = "hidden";
+    stopped();   
+  }
+});
+  </script>
+</body>
+</html>
